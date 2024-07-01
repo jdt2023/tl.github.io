@@ -3,107 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Webpage</title>
+    <title>Chat Application</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        #chat-container {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
             background-color: #f0f0f0;
         }
-        #contentContainer {
-            flex: 2;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-bottom: 1px solid #ccc;
-        }
-        #chatContainer {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #e9ecef;
-            border-bottom: 1px solid #ccc;
-        }
-        #chatBox {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            background-color: #fafafa;
-        }
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .message.user {
-            background-color: #d1e7dd;
-            align-self: flex-start;
-        }
-        .message.other {
-            background-color: #f8d7da;
-            align-self: flex-end;
-        }
-        .deleteButton {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: none;
-            border: none;
-            color: red;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        #inputContainer {
-            display: flex;
-            padding: 10px;
-            background-color: #f0f0f0;
-        }
-        #messageInput {
-            flex: 1;
+        #message-input {
+            width: 80%;
+            max-width: 600px;
+            height: 40px;
             padding: 10px;
             font-size: 16px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #fff;
         }
-        #sendButton {
-            margin-left: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        #send-button {
+            width: 80%;
+            max-width: 600px;
+            height: 45px;
             background-color: #007bff;
             color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        #sendButton:hover {
+        #send-button:hover {
             background-color: #0056b3;
         }
-        #contactInfo {
-            padding: 20px;
-            background-color: #fff;
-            text-align: center;
-            border-top: 1px solid #ccc;
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div id="contentContainer"><form id="chat-form">
-  <input type="text" id="message-input" placeholder="Type a message">
-  <button type="submit" id="send-button">Send</button>
-</form>
-
-        <h1>我的文章和帖子</h1>
-        <p>这里是一些文章和帖子内容。</p>
-        <p>你可以在这里添加更多的内容。</p>
+    <div id="chat-container">
+        <form id="chat-form">
+            <input type="text" id="message-input" placeholder="Type a message">
+            <button type="submit" id="send-button">Send</button>
+        </form>
+        <footer>
+            <p>Contact us at: <a href="mailto:support@example.com">support@example.com</a></p>
+        </footer>
     </div>
-    <div id="chatContainer">
-        <div id="chatBox"></div>
-        <div id="inputContainer">
-            <textarea id="messageInput" rows="2"></textarea>
-            <button id="send
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let message = document.getElementById('message-input').value;
+            if (message) {
+                // 这里是处理发送消息的逻辑
+                console.log('Message sent: ' + message); // 可以替换为实际的发送逻辑
+                document.getElementById('message-input').value = ''; // 清空输入框
+            }
+        });
+    </script>
+</body>
+</html>
