@@ -62,6 +62,7 @@
         #inputContainer {
             display: flex;
             padding: 10px;
+            background-color: #f0f0f0; /* 调整输入框背景色 */
         }
         #messageInput {
             flex: 1;
@@ -141,3 +142,27 @@
 
         function saveMessage(text, type) {
             let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            messages.push({ text, type });
+            localStorage.setItem('chatMessages', JSON.stringify(messages));
+        }
+
+        function loadMessages() {
+            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            messages.forEach((message, index) => addMessage(message.text, message.type, index));
+            document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+        }
+
+        function deleteMessage(messageElement) {
+            const index = messageElement.dataset.index;
+            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            messages.splice(index, 1);
+            localStorage.setItem('chatMessages', JSON.stringify(messages));
+            messageElement.remove();
+            refreshMessages();
+        }
+
+        function refreshMessages() {
+            document.getElementById('chatBox').innerHTML = '';
+            loadMessages();
+        }
+    </script
