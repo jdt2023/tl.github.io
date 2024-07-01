@@ -33,6 +33,7 @@
             padding: 10px;
             overflow-y: auto;
             border-bottom: 1px solid #ccc;
+            background-color: #fafafa; /* 更改聊天框背景颜色 */
         }
         .message {
             position: relative;
@@ -62,7 +63,7 @@
         #inputContainer {
             display: flex;
             padding: 10px;
-            background-color: #f0f0f0; /* 调整输入框背景色 */
+            background-color: #f0f0f0; /* 更改输入框背景颜色 */
         }
         #messageInput {
             flex: 1;
@@ -71,6 +72,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+            background-color: #fff; /* 更改输入框背景颜色 */
         }
         #sendButton {
             margin-left: 10px;
@@ -131,38 +133,4 @@
 
             const deleteButton = document.createElement('button');
             deleteButton.className = 'deleteButton';
-            deleteButton.textContent = '撤回';
-            deleteButton.addEventListener('click', function() {
-                deleteMessage(messageElement);
-            });
-
-            messageElement.appendChild(deleteButton);
-            document.getElementById('chatBox').appendChild(messageElement);
-        }
-
-        function saveMessage(text, type) {
-            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            messages.push({ text, type });
-            localStorage.setItem('chatMessages', JSON.stringify(messages));
-        }
-
-        function loadMessages() {
-            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            messages.forEach((message, index) => addMessage(message.text, message.type, index));
-            document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
-        }
-
-        function deleteMessage(messageElement) {
-            const index = messageElement.dataset.index;
-            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            messages.splice(index, 1);
-            localStorage.setItem('chatMessages', JSON.stringify(messages));
-            messageElement.remove();
-            refreshMessages();
-        }
-
-        function refreshMessages() {
-            document.getElementById('chatBox').innerHTML = '';
-            loadMessages();
-        }
-    </script
+            deleteButton.textContent = '
