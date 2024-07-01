@@ -86,21 +86,55 @@
             event.preventDefault();
             let message = document.getElementById('message-input').value;
             if (message.trim() !== '') {
-                let messageList = document.getElementById('message-list');
-                let listItem = document.createElement('li');
-                listItem.className = 'message-item';
-                listItem.textContent = message;
-                messageList.appendChild(listItem);
+                addMessage(message);
                 document.getElementById('message-input').value = ''; // 清空输入框
             }
         });
 
         document.getElementById('retract-button').addEventListener('click', function() {
-            let messageList = document.getElementById('message-list');
-            if (messageList.lastChild) {
-                messageList.removeChild(messageList.lastChild);
-            }
+            retractLastMessage();
         });
+
+        function loadMessages() {
+            let messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.forEach(message => {
+                addMessageToDOM(message);
+            });
+        }
+
+        function saveMessages(messages) {
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+
+        function addMessage(message) {
+            let messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push(message);
+            saveMessages(messages);
+            addMessageToDOM(message);
+        }
+
+        function addMessageToDOM(message) {
+            let messageList = document.getElementById('message-list');
+            let listItem = document.createElement('li');
+            listItem.className = 'message-item';
+            listItem.textContent = message;
+            messageList.appendChild(listItem);
+        }
+
+        function retractLastMessage() {
+            let messages = JSON.parse(localStorage.getItem('messages')) || [];
+            if (messages.length > 0) {
+                messages.pop();
+                saveMessages(messages);
+                let messageList = document.getElementById('message-list');
+                if (messageList.lastChild) {
+                    messageList.removeChild(messageList.lastChild);
+                }
+            }
+        }
+
+        // 加载页面时从本地存储中恢复消息
+        loadMessages();
     </script>
 </body>
 </html>
