@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>讨论区</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Input</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-  <h1>讨论区</h1>
-  <div id="posts-container"></div>
-  <form id="post-form">
-   <!-- 替换为 textarea -->
-<textarea name="message" id="messageInput"></textarea>
-    <button type="submit">发帖</button>
-  </form>
-</div>
-<script src="script.js"></script>
+    <form>
+        <label for="messageInput">Your Message:</label><br>
+        <textarea name="message" id="messageInput"></textarea><br>
+        <button type="submit">Send</button>
+    </form>
 </body>
 </html>
