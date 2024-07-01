@@ -1,17 +1,20 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('post-form');
-  const postContent = document.getElementById('post-content');
-  const postsContainer = document.getElementById('posts-container');
-
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const content = postContent.value.trim();
-    if (content !== '') {
-      const postElement = document.createElement('div');
-      postElement.classList.add('post');
-      postElement.textContent = content;
-      postsContainer.appendChild(postElement);
-      postContent.value = '';
-    }
-  });
-});
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>讨论区</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+  <h1>讨论区</h1>
+  <div id="posts-container"></div>
+  <form id="post-form">
+    <textarea id="post-content" placeholder="在这里输入您的发帖内容..."></textarea>
+    <button type="submit">发帖</button>
+  </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
