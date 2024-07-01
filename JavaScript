@@ -1,6 +1,9 @@
 document.getElementById('chat-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  let message = document.getElementById('message-input').value;
-  if (message) {
-    // 发送消息的逻辑
-    document.getElementById('message-input').value = ''; // 清空输入框
+    event.preventDefault();
+    let message = document.getElementById('message-input').value;
+    if (message.trim() !== '') {
+        // 这里是处理发送消息的逻辑
+        console.log('发送的信息: ' + message); // 可以替换为实际的发送逻辑
+        document.getElementById('message-input').value = ''; // 清空输入框
+    }
+});
