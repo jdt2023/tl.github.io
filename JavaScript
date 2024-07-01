@@ -1,24 +1,6 @@
-const WebSocket = require('ws');
-
-const server = new WebSocket.Server({ port: 8080 });
-
-let clients = [];
-
-server.on('connection', socket => {
-    clients.push(socket);
-
-    socket.on('message', message => {
-        // 广播消息给所有客户端
-        clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        });
-    });
-
-    socket.on('close', () => {
-        clients = clients.filter(client => client !== socket);
-    });
-});
-
-console.log('WebSocket server is running on ws://localhost:8080');
+document.getElementById('chat-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  let message = document.getElementById('message-input').value;
+  if (message) {
+    // 发送消息的逻辑
+    document.getElementById('message-input').value = ''; // 清空输入框
