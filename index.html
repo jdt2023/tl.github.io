@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Application</title>
+    <title>聊天应用</title>
     <style>
         #chat-container {
             display: flex;
@@ -12,6 +12,7 @@
             justify-content: center;
             height: 100vh;
             background-color: #f0f0f0;
+            padding: 20px;
         }
         #message-input {
             width: 80%;
@@ -22,6 +23,7 @@
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         #send-button {
             width: 80%;
@@ -33,6 +35,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            box-sizing: border-box;
         }
         #send-button:hover {
             background-color: #0056b3;
@@ -42,16 +45,23 @@
             font-size: 14px;
             color: #666;
         }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div id="chat-container">
         <form id="chat-form">
-            <input type="text" id="message-input" placeholder="Type a message">
-            <button type="submit" id="send-button">Send</button>
+            <input type="text" id="message-input" placeholder="输入信息">
+            <button type="submit" id="send-button">发送</button>
         </form>
         <footer>
-            <p>Contact us at: <a href="mailto:support@example.com">support@example.com</a></p>
+            <p>联系我们: <a href="mailto:1872974@gmail.com">1872974@gmail.com</a></p>
         </footer>
     </div>
     <script>
@@ -60,7 +70,7 @@
             let message = document.getElementById('message-input').value;
             if (message) {
                 // 这里是处理发送消息的逻辑
-                console.log('Message sent: ' + message); // 可以替换为实际的发送逻辑
+                console.log('发送的信息: ' + message); // 可以替换为实际的发送逻辑
                 document.getElementById('message-input').value = ''; // 清空输入框
             }
         });
