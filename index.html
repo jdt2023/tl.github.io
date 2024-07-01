@@ -35,6 +35,7 @@
             border-bottom: 1px solid #ccc;
         }
         .message {
+            position: relative;
             margin: 10px 0;
             padding: 10px;
             border-radius: 5px;
@@ -47,6 +48,16 @@
         .message.other {
             align-self: flex-end;
             background-color: #f8d7da;
+        }
+        .deleteButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 12px;
         }
         #inputContainer {
             display: flex;
@@ -108,24 +119,25 @@
             });
         });
 
-        function addMessage(text, type) {
+        function addMessage(text, type, index = null) {
             const messageElement = document.createElement('div');
             messageElement.className = `message ${type}`;
             messageElement.textContent = text;
+
+            if (index !== null) {
+                messageElement.dataset.index = index;
+            }
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'deleteButton';
+            deleteButton.textContent = '撤回';
+            deleteButton.addEventListener('click', function() {
+                deleteMessage(messageElement);
+            });
+
+            messageElement.appendChild(deleteButton);
             document.getElementById('chatBox').appendChild(messageElement);
         }
 
         function saveMessage(text, type) {
             let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            messages.push({ text, type });
-            localStorage.setItem('chatMessages', JSON.stringify(messages));
-        }
-
-        function loadMessages() {
-            let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            messages.forEach(message => addMessage(message.text, message.type));
-            document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
-        }
-    </script>
-</body>
-</html>
