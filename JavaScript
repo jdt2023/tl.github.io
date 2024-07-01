@@ -1,7 +1,24 @@
-input[type="text"], textarea {
-    width: 100%; /* 或根据需要设置具体宽度，比如 80% */
-    height: auto; /* 设置自动高度，也可以设置具体高度，比如 100px */
-    padding: 10px; /* 增加内边距让输入框看起来更舒适 */
-    font-size: 16px; /* 调整字体大小 */
-    box-sizing: border-box; /* 确保填充和边框不会增加输入框的总宽度 */
-}
+const WebSocket = require('ws');
+
+const server = new WebSocket.Server({ port: 8080 });
+
+let clients = [];
+
+server.on('connection', socket => {
+    clients.push(socket);
+
+    socket.on('message', message => {
+        // 广播消息给所有客户端
+        clients.forEach(client => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+        });
+    });
+
+    socket.on('close', () => {
+        clients = clients.filter(client => client !== socket);
+    });
+});
+
+console.log('WebSocket server is running on ws://localhost:8080');
