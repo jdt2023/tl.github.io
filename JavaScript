@@ -1,0 +1,17 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('post-form');
+  const postContent = document.getElementById('post-content');
+  const postsContainer = document.getElementById('posts-container');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const content = postContent.value.trim();
+    if (content !== '') {
+      const postElement = document.createElement('div');
+      postElement.classList.add('post');
+      postElement.textContent = content;
+      postsContainer.appendChild(postElement);
+      postContent.value = '';
+    }
+  });
+});
