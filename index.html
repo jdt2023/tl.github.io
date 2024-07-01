@@ -38,6 +38,9 @@
             cursor: pointer;
             box-sizing: border-box;
         }
+        #retract-button {
+            height: 40px; /* 调整撤回按钮高度 */
+        }
         #send-button:hover, #retract-button:hover {
             background-color: #0056b3;
         }
@@ -96,14 +99,34 @@
         });
 
         function loadMessages() {
-            let messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messages.forEach(message => {
-                addMessageToDOM(message);
-            });
+            let messages = localStorage.getItem('messages');
+            if (messages) {
+                messages = JSON.parse(messages);
+                messages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+            } else {
+                fetch('messages.txt')
+                    .then(response => response.text())
+                    .then(text => {
+                        let messages = text.trim().split('\n');
+                        messages.forEach(message => {
+                            addMessageToDOM(message);
+                        });
+                        saveMessages(messages);
+                    });
+            }
         }
 
         function saveMessages(messages) {
             localStorage.setItem('messages', JSON.stringify(messages));
+            let blob = new Blob([messages.join('\n')], { type: 'text/plain' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'messages.txt';
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
         function addMessage(message) {
