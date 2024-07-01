@@ -1,17 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('post-form');
-  const postContent = document.getElementById('post-content');
-  const postsContainer = document.getElementById('posts-container');
-
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const content = postContent.value.trim();
-    if (content !== '') {
-      const postElement = document.createElement('div');
-      postElement.classList.add('post');
-      postElement.textContent = content;
-      postsContainer.appendChild(postElement);
-      postContent.value = '';
-    }
-  });
-});
+input[type="text"], textarea {
+    width: 100%; /* 或根据需要设置具体宽度，比如 80% */
+    height: auto; /* 设置自动高度，也可以设置具体高度，比如 100px */
+    padding: 10px; /* 增加内边距让输入框看起来更舒适 */
+    font-size: 16px; /* 调整字体大小 */
+    box-sizing: border-box; /* 确保填充和边框不会增加输入框的总宽度 */
+}
